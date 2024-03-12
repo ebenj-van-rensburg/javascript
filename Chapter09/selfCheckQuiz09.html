@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Self Check Quiz 09</title>
+</head>
+
+<body>
+    1. Go to your favorite website and open the browser console. Type document.body. 
+    What do you see in the console? <br>
+    body#www-wikipedia-org.jsl10n-visible (the full output is the body structure o fthe page)
+<br><br>
+    2. As we know, with objects, we can write to the property value and assign a
+    new value with the assignment operator. Update the textContent property
+    of the document.body object on a web page of your choosing to contain the
+    string Hello World. <br>
+    successfully set wikipedia body.textContent to "Wikipedia: Hello World"
+<br><br>
+    3. Use what we learned about objects to list out BOM object properties and
+    values. Try it on the document object. <br>
+    console.dir(document);
+    <script>
+        console.dir(document);
+    </script>
+<br><br>
+    4. Now do the same for the window object. <br>
+    console.dir(window);
+    <script>
+        console.dir(window);
+    </script>
+<br><br>
+    5. Create an HTML file with an h1 tag. Use JavaScript and select the page
+    element with the h1 tag and assign the element into a variable. Update the
+    textContent property of the variable to Hello World.
+    <h1></h1>
+    <script>
+        let h1 = document.querySelector("h1");
+        h1.textContent = "Hello World";
+    </script>
+</body>
+
+</html>
