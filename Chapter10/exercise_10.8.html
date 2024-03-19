@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 10.8</title>
+</head>
+
+<body>
+    <div id="output"></div>
+    <div id="message"></div>
+    <script>
+        const nameArr = ["Link", "Eddie", "Dave", "Rishen", "Kamva"],
+            message = document.getElementById("message"),
+            output = document.getElementById("output");
+        build();
+
+        function build() {
+            let html = "<table >Table of Friends";
+            nameArr.forEach((e, i) => {html += `<tr class="box" data-row="${i + 1}" data-name="${e}" onclick="getData(this)"><td>${i + 1}</td><td>${e}</td></tr>`});
+            html += "</table>"
+            output.innerHTML = html
+        }
+
+        function getData(e) {
+            let dataRow = e.getAttribute("data-row"),
+                dataName = e.getAttribute("data-name");
+            message.innerHTML = `${dataName} is in row ${dataRow}`;
+        }
+    </script>
+</body>
+
+</html>

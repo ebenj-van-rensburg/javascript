@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 10.3: Hangman</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: rgb(25, 25, 25);
+            color: rgb(226, 255, 253);
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .gameArea {
+            text-align: center;
+            font-size: 2em;
+        }
+
+        .box,
+        .boxD {
+            display: inline-block;
+            padding: 5px;
+        }
+
+        .boxE {
+            display: inline-block;
+            width: 40px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1.5em;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="text-align: center;">Hangman</h1>
+    <div class="gameArea">
+        <div class="lives"></div>
+        <div class="puzzle"></div>
+        <input type="text" class="letters" value="a" maxlength="1" style="width: 25px; text-align: center;"><br>
+        <div class="output"></div>
+        <button class="startBtn">Start Game</button>
+        <button class="guessBtn">Enter Guess</button>
+    </div>
+    <script>
+        "use strict";
+
+        let print = console.log;
+
+        const words = [
+            "javascript",
+            "monkey",
+            "amazing",
+            "pancake",
+            "teacher",
+            "wolf",
+            "tree",
+            "atomic",
+            "crazy",
+            "wonderful",
+            "energetic",
+            "silly",
+            "jazz"
+        ],
+            mainGame = { word: "", puzzle: "", puzzleDisplay: [], lives: 0 },
+            lives = document.querySelector(".lives"),
+            puzzle = document.querySelector(".puzzle"),
+            letters = document.querySelector(".letters"),
+            output = document.querySelector(".output"),
+            btn = document.querySelector(".startBtn"),
+            guessBtn = document.querySelector(".guessBtn");
+        let remainingLetters,
+            correctGuesses,
+            alreadyGuessed;
+
+        letters.disabled = true;
+        guessBtn.disabled = true;
+        guessBtn.addEventListener("click", play)
+        btn.addEventListener("click", start);
+
+        function start() {
+            mainGame.word = words[Math.floor(Math.random() * words.length)];
+            print(mainGame.word)
+            mainGame.puzzle = mainGame.word.split("");
+            mainGame.puzzleDisplay = [];
+            mainGame.puzzle.forEach((e) => {
+                mainGame.puzzleDisplay.push("_");
+            });
+            mainGame.lives = 5;
+            lives.textContent = ("Lives: " + mainGame.lives);
+            puzzle.textContent = mainGame.puzzleDisplay.join(" ");
+            letters.disabled = false;
+            output.textContent = "";
+            btn.disabled = true;
+            guessBtn.disabled = false;
+            remainingLetters = mainGame.word.length;
+            correctGuesses = 0;
+        }
+        function updateGameState() {
+            letters.value = letters.value.toLowerCase();
+            correctGuesses = 0;
+            alreadyGuessed = false
+            for (let i = 0; i < mainGame.word.length; ++i) {
+                if (mainGame.word[i] === letters.value) {
+                    if (mainGame.puzzleDisplay[i] === "_") {
+                        mainGame.puzzleDisplay[i] = letters.value;
+                        puzzle.textContent = mainGame.puzzleDisplay.join(" ");
+                        correctGuesses++;
+                    } else {
+                        alreadyGuessed = true;
+                        return;
+                    }
+                }
+            }
+            return correctGuesses;
+        }
+        function checkGuessState() {
+            if (correctGuesses > 0) {
+                remainingLetters -= correctGuesses;
+            } else if (alreadyGuessed === true) {
+                output.textContent = (`You already guessed: ${letters.value}`);
+            } else {
+                mainGame.lives--;
+                lives.textContent = `Lives: ${mainGame.lives}`;
+            }
+        }
+        function play() {
+            print(letters.value)
+            output.textContent = "";
+            endCheck();
+            if (letters.value.length !== 1) {
+                output.textContent = ("Please enter a single letter.");
+            } else {
+                correctGuesses = updateGameState();
+                checkGuessState();
+            }
+            endCheck()
+        }
+
+        function endCheck() {
+            if ((letters.value == "" || letters.value == " ") || remainingLetters === 0 || mainGame.lives === 0) {
+                letters.disabled = true;
+                btn.disabled = false;
+                guessBtn.disabled = true;
+                if (letters.value == "" || letters.value == " ") {
+                    output.textContent = (`Sorry to see you leave.\nThe word was: ${mainGame.word}`);
+                } else if (remainingLetters === 0) {
+                    output.textContent = (`Congrats!\nYou guessed the word: ${mainGame.word}`);
+                } else if (mainGame.lives === 0) {
+                    output.textContent = (`Sorry, you ran out of guesses.\nThe word was: ${mainGame.word}`);
+                } else {
+                    output.textContent = (`Something went seriously wrong. Please reload the page.`)
+                }
+            }
+        }
+
+    </script>
+</body>
+
+</html>

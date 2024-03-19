@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 10.6</title>
+</head>
+
+<body>
+    <p class="el">p el1</p>
+    <div class="el">div el1</div>
+    <p class="el">p el2</p>
+    <div class="el">div el2</div>
+    <script>
+        let elArr = document.querySelectorAll(".el");
+        console.log(elArr);
+        for (e of elArr) {
+            console.log(e.textContent);
+        }
+    </script>
+</body>
+
+</html>

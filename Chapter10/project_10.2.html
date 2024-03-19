@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 10.2</title>
+</head>
+
+<body>
+    <div id="message">Complete JavaScript Course</div>
+    <div>
+        <input type="text" id="addFriend">
+        <input type="button" id="addNew" value="Add Friend">
+    </div>
+    <table id="output"></table>
+    <script>
+        window.onload = build;
+        const nameArr = ["Eben", "Link", "Eduan", "Dave", "Kamva", "Savvas"],
+            message = document.getElementById("message"),
+            addNewBtn = document.getElementById("addNew"),
+            input = document.getElementById("addFriend"),
+            output = document.getElementById("output");
+
+        addNewBtn.addEventListener("click", (e) => {
+            add(input.value, nameArr.length, 0);
+            nameArr.push(input.value);
+        })
+
+        function build(item, index) {
+            nameArr.forEach((item, index) => {
+                add(item, index, 0);
+            });
+        }
+
+        function add(name, index, counter) {
+            const tr = document.createElement("tr"),
+                td1 = document.createElement("td"),
+                td2 = document.createElement("td"),
+                td3 = document.createElement("td");
+            td1.textContent = index+1;
+            td2.textContent = name;
+            td3.textContent = counter;
+            tr.append(td1, td2, td3);
+            tr.addEventListener("click", () => {
+                tr.lastChild.textContent++
+            })
+            output.append(tr);
+        }
+    </script>
+</body>
+
+</html>

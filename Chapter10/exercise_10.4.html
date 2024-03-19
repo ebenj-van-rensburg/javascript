@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 10.4</title>
+</head>
+<body>
+    <div class="aDiv"><strong>WIKIPEDIA</strong></div>
+    <p class="aDiv">Go to Wikipedia to learn about nearly anything: </p>
+    <a href="https://www.wikipedia.org/" class="aDiv">https://www.wikipedia.org/</a>
+    <script>
+        let classDiv = document.getElementsByClassName("aDiv"),
+            el0 = classDiv.item(0),
+            el1 = classDiv.item(1),
+            el2 = classDiv.item(2);
+        console.log(el0, el1, el2)
+        
+    </script>
+</body>
+</html>
