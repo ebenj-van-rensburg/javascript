@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 12.3</title>
+</head>
+
+<body>
+    <span class="val1"></span> <span>+</span> <span class="val2"></span> = <span>
+        <input type="text" name="answer"></span><button>Check</button>
+        <div class="output"></div>
+    <script>
+        const app = function () {
+            const val1 = document.querySelector(".val1"),
+                val2 = document.querySelector(".val2"),
+                output = document.querySelector(".output"),
+                answer = document.querySelector("input"),
+                button = document.querySelector("button"),
+                game = {};
+
+            function init() {
+                button.addEventListener("click", checker);
+                loadQuestion();
+            }
+
+            function loadQuestion() {
+                game.val1 = Math.floor((Math.random() * 100) + 1);
+                game.val2 = Math.floor((Math.random() * 100) + 1);
+                game.answer = game.val1 + game.val2;
+                val1.textContent = game.val1;
+                val2.textContent = game.val2;
+            }
+            function checker() {
+                let bg = answer.value == game.answer ? "green" : "red";
+                output.innerHTML +=
+                    `<div style="color:${bg}">${game.val1} + ${game.val2} = ${answer.value}</div>`;
+                answer.value = "";
+                loadQuestion();
+            }
+            return {
+                init: init
+            };
+        }();
+        document.addEventListener('DOMContentLoaded', app.init);
+    </script>
+</body>
+
+</html>

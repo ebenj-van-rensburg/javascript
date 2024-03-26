@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 12.7</title>
+    <style>
+        .ready {
+            background-color: #ddd;
+            color: red;
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <input placeholder="New Item" value="test item" maxlength="30">
+        <button>Add</button>
+    </div>
+    <ul class="output">
+    </ul>
+    <script>
+        const input = document.querySelector(".main input"),
+            button = document.querySelector(".main button"),
+            output = document.querySelector(".output"),
+            tasksArr = JSON.parse(localStorage.getItem("tasks")) || [];
+        button.addEventListener("click", tasksArrAdd);
+        if (tasksArr.length > 0) {
+            tasksArr.forEach((task) => {
+                genTask(task.val, task.checked);
+            });
+        }
+        function taksArrSave() {
+            localStorage.setItem("tasks", JSON.stringify(tasksArr));
+        }
+        function tasksArrBuild() {
+            tasksArr.length = 0;
+            const curList = output.querySelectorAll("li");
+            curList.forEach((el) => {
+                const tempTask = {
+                    val: el.textContent,
+                    checked: false
+                };
+                if (el.classList.contains("ready")) {
+                    tempTask.checked = true;
+                }
+                tasksArr.push(tempTask);
+            });
+            taksArrSave();
+        }
+        function genTask(val, complete) {
+            const li = document.createElement("li");
+            const temp = document.createTextNode(val);
+            li.appendChild(temp);
+            output.append(li);
+            input.value = "";
+            if (complete) {
+                li.classList.add("ready");
+            }
+            li.addEventListener("click", (e) => {
+                li.classList.toggle("ready");
+                tasksArrBuild();
+            });
+            return val;
+        }
+        function tasksArrAdd() {
+            const val = input.value;
+            if (val.length > 0) {
+                const myObj = {
+                    val: genTask(val, false),
+                    checked: false
+                };
+                tasksArr.push(myObj);
+                taksArrSave();
+            }
+        }
+    </script>
+</body>
+
+</html>

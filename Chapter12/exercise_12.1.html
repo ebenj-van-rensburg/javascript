@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 12.1</title>
+</head>
+
+<body>
+    <div id="output">Complete JavaScript Course</div>
+    Search for:
+    <input id="sText" type="text">
+    <br> Replace with:
+    <input id="rText" type="text">
+    <br>
+    <button>Replace</button>
+    <script>
+        const searchText = document.getElementById("sText"),
+            replaceText = document.getElementById("rText"),
+            output = document.getElementById("output");
+document.querySelector("button").addEventListener("click", replace);
+
+        function replace() {
+            const start = output.textContent,
+                replacer = replaceText.value,
+                regexStr = new RegExp(searchText.value, "gi");
+                console.log(regexStr)
+            if (start.match(regexStr)) {
+                let newOutput = start.replace(regexStr, replacer)
+                output.textContent = newOutput;
+            }
+        }
+    </script>
+</body>
+
+</html>

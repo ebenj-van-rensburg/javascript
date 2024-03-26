@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 12.2</title>
+</head>
+
+<body>
+    <input type="text" placeholder="Enter Email">
+    <button>Check</button>
+    <div class="output"></div>
+    <script>
+        const output = document.querySelector(".output"),
+            email = document.querySelector("input"),
+            validEmail = /([a-z0-9._-]+@[a-z0-9._-]+\.[a-z0-9._-]+)/i
+
+        document.querySelector("button").addEventListener("click", (e) => {
+            const emailVal = email.value,
+                result = validEmail.test(emailVal);
+                result ? (output.textContent = "Valid Email") && (output.style.backgroundColor = "green") : (output.textContent = "Invalid Email") && (output.style.backgroundColor = "red")
+        });
+    </script>
+</body>
+
+</html>

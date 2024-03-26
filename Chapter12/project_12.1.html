@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 12.1</title>
+</head>
+
+<body>
+    <textarea class="txtarea" rows=2 cols=50></textarea> <button>Get
+        Emails</button>
+    <textarea class="txtarea2" rows=2 cols=50></textarea>
+    <script>
+        "use strict";
+
+        let print = console.log;
+
+        const input = document.querySelector(".txtarea"),
+            output = document.querySelector(".txtarea2"),
+            btn = document.querySelector("button");
+
+        btn.addEventListener("click", (e) => {
+            const tempEmail = input.value,
+                result = tempEmail.match(/([a-z0-9._-]+@[a-z0-9._-]+\.[a-z0-9._-]+)/i);
+            result ? (output.value = tempEmail) : (output.value = "Invalid Email");
+            const tempArr = [];
+            for (let i = 0; i < result.length; i++) {
+                if (tempArr.indexOf(result[i] == -1)) {
+                    tempArr.push(result[i])
+                }
+            }
+            output.value = tempArr.join(",");
+        });
+    </script>
+</body>
+
+</html>
