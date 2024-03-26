@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON from HTML Form</title>
+    <style>
+        .hide {
+            display: none;
+        }
+
+        .error {
+            color: red;
+            font-size: 0.8em;
+            font-family: sans-serif;
+            font-style: italic;
+        }
+
+        input {
+            border-color: #ddd;
+            width: 400px;
+            display: block;
+            font-size: 1.5em;
+        }
+    </style>
+</head>
+
+<body>
+    <form name="myform"> Email :
+        <input type="email" name="email"> <span class="error hide"></span>
+        <br> User Name :
+        <input type="text" name="userName"> <span class="error hide"></span>
+        <br> Password :
+        <input type="password" name="password"> <span class="error hide"></span>
+        <br>
+        <button type="submit">Sign Up</button>
+    </form>
+    <div class="output"></div>
+    <script>
+        const form = document.querySelector("form"),
+            inputs = document.querySelectorAll("input"),
+            errors = document.querySelectorAll(".error")
+
+        window.onload = localLoadup;
+
+        form.addEventListener("submit", formCheck);
+        form.addEventListener("submit", handleSubmit);
+
+        function formCheck(e) {
+            let formData = {},
+                error = false,
+                inputNames = ["email", "userName", "password"];
+            e.preventDefault();
+            errors.forEach((err) => {
+                err.classList.add("hide");
+            });
+            inputs.forEach((input) => {
+                let name = input.getAttribute("name")
+
+                if (input.value.length === 0 && inputNames.includes(name)) {
+                    errs(input, "Required Field", name);
+                    error = true;
+                } else if (name == "email" && !input.value.match(/([a-z0-9 ._-]+@[a-z0-9._-]+\.[a-z0-9._-]+)/i)) {
+                    errs(input, "Invalid Address", name);
+                    error = true;
+                } else if (name == "password" && (input.value.length < 8 || input.value.length > 16)) {
+                    errs(input, "Needs to be between 8-16 characters", name);
+                    error = true;
+                }
+                form[name] = input.value;
+            })
+            error ? console.log("error") : form.submit();
+        }
+
+        function handleSubmit(event) {
+            event.preventDefault
+            const formData = new FormData(form), 
+                formJSON = Object.fromEntries(formData),
+                formStr = JSON.stringify(formJSON);
+            localStorage.setItem("formStr", formStr)
+            formStr.forEach((e) => {
+                console.log(e)
+            })
+        }
+
+        function localLoadup() {
+            const formStr = JSON.parse(localStorage.getItem("formStr"));
+            console.log(formStr)
+            
+        }
+
+        function errs(e, message, fieldName) {
+            let err = e.nextElementSibling;
+            err.classList.remove("hide");
+            err.textContent = `${fieldName.toUpperCase()} ${message}`;
+            e.focus();
+        }
+    </script>
+</body>
+
+</html>
