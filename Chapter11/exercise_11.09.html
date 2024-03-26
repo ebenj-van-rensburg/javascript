@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 11.9</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            background-color: white;
+        }
+
+        .blue {
+            background-color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">1
+        <div id="dragme" draggable="true">
+            Drag Me Please!
+        </div>
+    </div>
+    <div class="box">2</div>
+    <script>
+        const dragDrop = document.querySelector("#dragme"),
+            dropBoxes = document.querySelectorAll(".box");
+            dragDrop.style.opacity
+        dragDrop.addEventListener("dragstart", (e) => dragDrop.style.opacity = "0.5");
+        dragDrop.addEventListener("dragend", (e) => dragDrop.style.opacity = "1");
+        dropBoxes.forEach(box => {
+            box.addEventListener("dragenter", (e) => e.target.classList.add("blue"));
+            box.addEventListener("dragover", (e) => e.preventDefault());
+            box.addEventListener("dragleave", (e) => e.target.classList.remove("blue"));
+            box.addEventListener("drop", (e) => {e.preventDefault();e.target.appendChild(dragDrop)});
+        })
+    </script>
+</body>
+
+</html>

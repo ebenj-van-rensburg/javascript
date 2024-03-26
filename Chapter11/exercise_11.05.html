@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 11.5</title>
+</head>
+
+<body>
+    <div class="output"></div>
+    <input type="text" name="message" placeholder="Your Message">
+    <button class="btn1">Button 1</button>
+    <button class="btn2">Button 2</button>
+    <div>
+        <button class="btn3">Log</button>
+    </div>
+    <script>
+        const output = document.querySelector(".output"),
+            input = document.querySelector("input"),
+            btn1 = document.querySelector(".btn1"),
+            btn2 = document.querySelector(".btn2"),
+            btn3 = document.querySelector(".btn3");
+        let log = [];
+        btn1.addEventListener("click", logAdder);
+        btn2.addEventListener("click", logAdder);
+        btn3.addEventListener("click", (e) => console.log((log)));
+        function logAdder(ev) {
+            output.textContent = input.value;
+            const eventVar = ev.target;
+            // console.dir(eventVar)
+            log.push([input.value, eventVar.type, eventVar.tagName, eventVar.className]);
+            input.value = "";
+        }
+    </script>
+</body>
+
+</html>

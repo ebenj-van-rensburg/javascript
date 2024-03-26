@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 11.4</title>
+</head>
+
+<body>
+    <div class="parentDivs" id="firstDiv"></div>
+    <script>
+        const div = document.querySelector(".parentDivs");
+        div.textContent = "hello world";
+        div.style.height = "500px";
+        div.style.width = "500px";
+        div.style.backgroundColor = "black";
+        div.addEventListener("mousedown", (eventObj) => colourChange("yellow", eventObj));
+        div.addEventListener("mouseover", (eventObj) => colourChange("red", eventObj));
+        div.addEventListener("mouseout", (eventObj) => colourChange("blue", eventObj));
+        div.addEventListener("mouseup", (eventObj) => colourChange("green", eventObj));
+        function colourChange(colorStr, eventObj) {
+            console.log(eventObj.type)
+            div.style.backgroundColor = colorStr;
+        }
+    </script>
+</body>
+
+</html>

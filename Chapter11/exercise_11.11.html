@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 11.11</title>
+    <style>
+        div {
+            background-color: purple;
+            width: 100px;
+            height: 100px;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+    <script>
+        const box = document.querySelector("#box");
+        let boxMove = {
+            speed: 10,
+            direction: 1,
+            position: 0
+        }
+        box.addEventListener("click", () => {
+            let x = 30;
+            id = setInterval(frame, 20);
+            function frame() {
+                if (x < 1) {
+                    clearInterval(id);
+                } else if (boxMove.position > 500 || boxMove.position < 0) {
+                    boxMove.direction *= -1;
+                }
+                x--;
+                boxMove.position += x * boxMove.direction;
+                box.style.left = boxMove.position + "px";
+            };
+        });
+    </script>
+</body>
+
+</html>

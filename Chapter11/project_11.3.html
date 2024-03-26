@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 11.3</title>
+    <style>
+        .active {
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mouseTracker" style="height: 200px; width: 200px; border: 1px solid black;"></div>
+    <div class="output"></div>
+    <script>
+        const mouseTracker = document.querySelector(".mouseTracker"),
+            output = document.querySelector(".output");
+        mouseTracker.addEventListener("mouseover", (e) => {
+            e.target.classList.add("active")
+        });
+        mouseTracker.addEventListener("mouseout", (e) => {
+            e.target.classList.remove("active")
+        });
+        mouseTracker.addEventListener("mousemove", (e) => {
+            output.textContent = `your mouse is at these coordinates:\nX: ${event.clientX}\nY: ${event.clientY}`;
+        });
+    </script>
+</body>
+
+</html>

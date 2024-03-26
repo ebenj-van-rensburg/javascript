@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 11.2</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: rgb(25, 25, 25);
+            color: rgb(226, 255, 253);
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .stars ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .star {
+            font-size: 2em;
+            color: #ddd;
+            display: inline-block;
+        }
+
+        .orange {
+            color: orange;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Star Rating</h1>
+    <ul class="stars">
+        <li class="star">&#10029;</li>
+        <li class="star">&#10029;</li>
+        <li class="star">&#10029;</li>
+        <li class="star">&#10029;</li>
+        <li class="star">&#10029;</li>
+        
+    </ul>
+    <div class="output"></div>
+    <script>
+        const starsClass = document.querySelector(".stars"),
+            output = document.querySelector(".output"),
+            stars = document.querySelectorAll(".star");
+        stars.forEach((e, i) => {
+            e.starValue = i + 1;
+            e.addEventListener("click", (e) => {
+                output.textContent = `You gave this a ${e.target.starValue} star rating!`
+                stars.forEach((s, i) => {
+                    if (i < e.target.starValue) {
+                        s.classList.add("orange");
+                    } else {
+                        s.classList.remove("orange")
+                    }
+                })
+            })
+        })
+    </script>
+</body>
+
+</html>

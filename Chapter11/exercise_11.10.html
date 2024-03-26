@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 11.10</title>
+</head>
+
+<body>
+    <form action="exercise_11.10.2.html" method="get">
+        <input type="text" id="firstName" name="firstName" placeholder="First name">
+        <input type="text" id="lastName" name="lastName" placeholder="Last name">
+        <input type="text" id="age" name="age" placeholder="Age">
+        <input type="submit" value="submit">
+    </form>
+    <script>
+        const formField1 = document.querySelector("form");
+        formField1.addEventListener("submit", (e) => {
+            let error = false;
+            if (formField1.firstName.value == "") {
+                console.log("Cannot leave First Name empty");
+                error = true;
+            }
+            if (formField1.lastName.value == "") {
+                console.log("Cannot leave Last Name empty");
+                error = true;
+            }
+            if (formField1.age.value == "") {
+                console.log("Cannot leave Age empty");
+                error = true;
+            } else if (formField1.age.value < 19) {
+                console.log("Must be older than 19");
+                error = true;
+            }
+            if (error) {
+                e.preventDefault();
+            }
+        });
+    </script>
+</body>
+
+</html>

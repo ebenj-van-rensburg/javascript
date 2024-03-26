@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 11.1</title>
+</head>
+
+<body>
+    <div class="mainContainer">
+        <div class="box" id="div">only in id div</div>
+        <p class="box" id="para">unique to id para</p>
+        <div class="box" id="vid">only seen from id vid</div>
+        <p class="box" id="graph">the one and only, id graph</p>
+    </div>
+    <script>
+        const trackArr = [],
+            mainContain = document.querySelector(".mainContainer");
+        mainContain.addEventListener("click", (e) => {
+            let clicked = event.target;
+            if (clicked.hasAttribute("id") !== true) {
+                
+            } else {
+                trackArr.length = 0;
+                trackArr.push(clicked.textContent, clicked.id, clicked.tagName, clicked.className);
+                console.log(trackArr);
+            }
+        })
+    </script>
+</body>
+
+</html>
